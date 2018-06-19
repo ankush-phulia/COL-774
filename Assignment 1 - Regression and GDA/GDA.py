@@ -6,10 +6,7 @@ from numpy.linalg import det
 
 
 def convert(s):
-    if s == 'Alaska':
-        return 0
-    else:
-        return 1
+    return int(s == 'Alaska')
 
 
 def parseInput(in_file_name, chk):
@@ -45,14 +42,13 @@ def get_params(X, Y):
             t1 = (xi - u0)
             t1.resize(1, len(xi))
             temp = np.dot(t1.transpose(), t1)
-            s += temp
             s0 += temp
         else:
             t1 = (xi - u1)
             t1.resize(1, len(xi))
             temp = np.dot(t1.transpose(), t1)
-            s += temp
             s1 += temp
+        s += temp
     return n0, n1, u0, u1, s0/n0, s1/n1, s/(n0 + n1)
 
 
@@ -93,17 +89,24 @@ def computeBdry2(p1, p2, u0, u1, s0, s1, X):
     return x1, x2
 
 
-X = parseInput('Data/q4x.dat', False)
-Y = parseInput('Data/q4y.dat', True)
+def Run():
+    X = parseInput('Data/q4x.dat', False)
+    Y = parseInput('Data/q4y.dat', True)
 
-X0 = np.array([X[i] for i in xrange(len(X)) if Y[i] == 0])
-X1 = np.array([X[i] for i in xrange(len(X)) if Y[i] == 1])
-X0t = X0.transpose()
-X1t = X1.transpose()
-mp.plot(X0t[0], X0t[1], 'o', color='red')
-mp.plot(X1t[0], X1t[1], 'o', color='green')
-p1, p2, u0, u1, s0, s1, s = get_params(X, Y)
-# print(get_params(X,Y))
-x, y = computeBdry2(p1, p2, u0, u1, s0, s1, X)
-mp.plot(x, y, 'o')
-mp.show()
+    X0 = np.array([X[i] for i in xrange(len(X)) if Y[i] == 0])
+    X1 = np.array([X[i] for i in xrange(len(X)) if Y[i] == 1])
+    X0t = X0.transpose()
+    X1t = X1.transpose()
+    mp.plot(X0t[0], X0t[1], 'o', color='red')
+    mp.plot(X1t[0], X1t[1], 'o', color='green')
+
+    p1, p2, u0, u1, s0, s1, s = get_params(X, Y)
+    # print(get_params(X,Y))
+
+    x, y = computeBdry2(p1, p2, u0, u1, s0, s1, X)
+    mp.plot(x, y, 'o')
+    mp.show()
+
+
+if __name__ == '__main__':
+    Run()

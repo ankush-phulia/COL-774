@@ -6,7 +6,7 @@ from numpy.linalg import inv
 
 def parseInput(in_file_name, chk):
     temp = (np.loadtxt(in_file_name, dtype=float, ndmin=2))
-    if chk == False:
+    if not(chk):
         return temp, temp.reshape((1, len(temp)))
     else:
         X = np.ones((len(temp), 2))
@@ -55,9 +55,14 @@ def plotWeighted(X, Y, t):
     return y
 
 
-X, x = parseInput('Data/q3x.dat', True)
-Y, y = parseInput('Data/q3y.dat', False)
+def Run():
+    X, x = parseInput('Data/q3x.dat', True)
+    Y, y = parseInput('Data/q3y.dat', False)
 
-plotPts(x, y)
-mp.plot(x[0], plotWeighted(X, Y, 10), 'o')
-mp.show()
+    plotPts(x, y)
+    mp.plot(x[0], plotWeighted(X, Y, 10), 'o')
+    mp.show()
+
+
+if __name__ == '__main__':
+    Run()
