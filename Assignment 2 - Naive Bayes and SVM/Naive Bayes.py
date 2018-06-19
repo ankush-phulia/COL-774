@@ -75,32 +75,30 @@ def classify(TA, ANum, CV, V, TestCases):
     return confusion, (correct*100.0)/len(TestCases)
 
 
-TA, ANum, CV, V = trainCases('Data/r8-train-all-terms-new.txt')
-TestCases = testCases('Data/r8-test-all-terms-new.txt')
+def Run():
+    TA, ANum, CV, V = trainCases('Data/r8-train-all-terms-new.txt')
+    TestCases = testCases('Data/r8-test-all-terms-new.txt')
 
-CMap, acc = classify(TA, ANum, CV, V, TestCases)
-print(acc)
-#MaxArt = max(ANum.items(), key=(lambda key : ANum[key]))[0]
-#randomAcc = 200.0/len(ANum)
-#majAcc = sum(CMap[MaxArt].values())*100.0/len(TestCases)
-#maxDiag,maxDiagKey = 0,0
-# for key in ANum.keys():
-#    if CMap[key][key] > maxDiag:
-#        maxDiagKey,maxDiag = key, CMap[key][key]
+    CMap, acc = classify(TA, ANum, CV, V, TestCases)
+    print(acc)
+    #MaxArt = max(ANum.items(), key=(lambda key : ANum[key]))[0]
+    #randomAcc = 200.0/len(ANum)
+    #majAcc = sum(CMap[MaxArt].values())*100.0/len(TestCases)
+    #maxDiag,maxDiagKey = 0,0
+    # for key in ANum.keys():
+    #    if CMap[key][key] > maxDiag:
+    #        maxDiagKey,maxDiag = key, CMap[key][key]
 
-# print(ANum)
-# print(len(ANum)/2)
-# print(randomAcc)
-# print(majAcc)
-# print(maxDiag)
-# print(maxDiagKey)
-# print(acc)
-# print(MaxArt)
-print(CMap)
+    # print(ANum)
+    # print(len(ANum)/2)
+    # print(randomAcc)
+    # print(majAcc)
+    # print(maxDiag)
+    # print(maxDiagKey)
+    # print(acc)
+    # print(MaxArt)
+    print(CMap)
 
 
-#tc,dtc = TestCases[0]
-#p1 = prob(dtc, CV['A'], V) + math.log(ANum['A']) - math.log(TA)
-#p2 = prob(dtc, CV['B'], V) + math.log(ANum['B']) - math.log(TA)
-# print(p1)
-# print(p2)
+if __name__ == '__main__':
+    Run()
