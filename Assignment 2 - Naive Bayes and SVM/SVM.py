@@ -1,14 +1,8 @@
 import math
 import numpy as np
 import cvxopt
-import scvxp as solverr
-
 # SCVXP used from paper by Martin Andersen and Lieven Vandenberghe
-
-if1 = 'Data/svm/traindata.txt'
-if2 = 'Data/svm/trainlabels.txt'
-if3 = 'Data/svm/testdata.txt'
-if4 = 'Data/svm/testlabels.txt'
+import scvxp as solverr
 
 
 def transY(Y):
@@ -187,48 +181,58 @@ def classify(X, Y, Xt, Yt, C=500, ker='linear', b=1.0, threshold=0.01):
         print((corr*100.0)/len(Yt))
 
 
-X, Y = getData(if1, if2)
-# print(Y)
-Xt, Yt = getData(if3, if4)
-#w = np.array(classify(X,Y,Xt,Yt))
-# print(w.transpose())
-# classify(Xt,Yt,Xt,Yt)
-classify(X, Y, Xt, Yt, 500, 'gaussian', 0.20)
-# classify(Xt,Yt,Xt,Yt,500,'gauss',0.447)
+def Run():
+    if1 = 'Data/svm/traindata.txt'
+    if2 = 'Data/svm/trainlabels.txt'
+    if3 = 'Data/svm/testdata.txt'
+    if4 = 'Data/svm/testlabels.txt'
 
-# libSVMformat(Xt,Yt,'test.txt')
+    X, Y = getData(if1, if2)
+    # print(Y)
+    Xt, Yt = getData(if3, if4)
+    #w = np.array(classify(X,Y,Xt,Yt))
+    # print(w.transpose())
+    # classify(Xt,Yt,Xt,Yt)
+    classify(X, Y, Xt, Yt, 500, 'gaussian', 0.20)
+    # classify(Xt,Yt,Xt,Yt,500,'gauss',0.447)
 
-#Yo = solver.softmargin(cvxopt.matrix(X),cvxopt.matrix(Y),500,'rbf',0.447).get('classifier')(cvxopt.matrix(Xt))
-#Yo = solver.softmargin(cvxopt.matrix(Xt),cvxopt.matrix(Yt),500,'rbf',0.447).get('classifier')(cvxopt.matrix(Xt))
+    # libSVMformat(Xt,Yt,'test.txt')
 
-#temp1 = cvxopt.matrix(0.0,(len(Xt),len(X)))
-#cvxopt.blas.gemm(XXt, XX[SV,:], temp1, 'N', 'T', b)
-#cvxopt.blas.scal(b, XXt ** 2 * cvxopt.matrix(1.0, (len(X[0]), 1))[:len(X[0])])
-#cvxopt.blas.ger(XXt ** 2 * cvxopt.matrix(1.0, (len(X[0]), 1))[:len(X[0])], cvxopt.matrix(1.0, (len(X[0]), 1)), temp1, -0.5)
-#cvxopt.blas.ger(cvxopt.matrix(1.0, (len(X[0]), 1)), getDiag(X)[SV], temp1, -0.5)
-#temp2 = cvxopt.exp(temp1)*solver['x'][SV] + solver['y'][0]
+    #Yo = solver.softmargin(cvxopt.matrix(X),cvxopt.matrix(Y),500,'rbf',0.447).get('classifier')(cvxopt.matrix(Xt))
+    #Yo = solver.softmargin(cvxopt.matrix(Xt),cvxopt.matrix(Yt),500,'rbf',0.447).get('classifier')(cvxopt.matrix(Xt))
 
-# train(Xt,X,Y,500,'Gaussian',2.5)
-#K1 = getLinKernel(X);
-#K2 = getGausKernel(X,2.5);
-#d = cvxopt.matrix(Y)
-#Xn = cvxopt.matrix(X)
-#gamma = 500
-#sol1 = svmcmpl.softmargin(Xn, d, gamma, 'linear')
+    #temp1 = cvxopt.matrix(0.0,(len(Xt),len(X)))
+    #cvxopt.blas.gemm(XXt, XX[SV,:], temp1, 'N', 'T', b)
+    #cvxopt.blas.scal(b, XXt ** 2 * cvxopt.matrix(1.0, (len(X[0]), 1))[:len(X[0])])
+    #cvxopt.blas.ger(XXt ** 2 * cvxopt.matrix(1.0, (len(X[0]), 1))[:len(X[0])], cvxopt.matrix(1.0, (len(X[0]), 1)), temp1, -0.5)
+    #cvxopt.blas.ger(cvxopt.matrix(1.0, (len(X[0]), 1)), getDiag(X)[SV], temp1, -0.5)
+    #temp2 = cvxopt.exp(temp1)*solver['x'][SV] + solver['y'][0]
 
-#Xt,Yt = getData(if3,if4)
-#Xn = cvxopt.matrix(Xt)
-#print(' ')
-#Yo = sol1.get('classifier')(Xn)
+    # train(Xt,X,Y,500,'Gaussian',2.5)
+    #K1 = getLinKernel(X);
+    #K2 = getGausKernel(X,2.5);
+    #d = cvxopt.matrix(Y)
+    #Xn = cvxopt.matrix(X)
+    #gamma = 500
+    #sol1 = svmcmpl.softmargin(Xn, d, gamma, 'linear')
 
-#corr = 0
-# for i in xrange(len(Yt)):
-#    if Yo[i] == Yt[i][0]:
-#        corr += 1
-# print((corr*100.0)/len(Yt))
+    #Xt,Yt = getData(if3,if4)
+    #Xn = cvxopt.matrix(Xt)
+    #print(' ')
+    #Yo = sol1.get('classifier')(Xn)
 
-#K = np.zeros((2*len(Y),len(Y)))
-# for i in xrange(len(Y)):
-#    K[i][i] = Y[i]
-#    K[i+len(Y)][i] = -Y[i]
-# return cvxopt.matrix(K, tc = 'd')
+    #corr = 0
+    # for i in xrange(len(Yt)):
+    #    if Yo[i] == Yt[i][0]:
+    #        corr += 1
+    # print((corr*100.0)/len(Yt))
+
+    #K = np.zeros((2*len(Y),len(Y)))
+    # for i in xrange(len(Y)):
+    #    K[i][i] = Y[i]
+    #    K[i+len(Y)][i] = -Y[i]
+    # return cvxopt.matrix(K, tc = 'd')
+
+
+if __name__ == '__main__':
+    Run()

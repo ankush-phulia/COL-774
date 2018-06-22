@@ -6,7 +6,7 @@ from numpy.linalg import inv
 
 def parseInput(in_file_name, chk):
     temp = (np.loadtxt(in_file_name, dtype=float, ndmin=2))
-    if chk == False:
+    if not(chk):
         return temp, temp.reshape((1, len(temp)))
     else:
         X = np.ones((len(temp), 3))
@@ -58,16 +58,23 @@ def eval(T, X):
     return x1, x2
 
 
-X, x = parseInput('Data/q2x.dat', True)
-Y, y = parseInput('Data/q2y.dat', False)
-T = NewtonRaphson(X, Y, 0.00000000001)
-X0 = np.array([X[i] for i in xrange(len(X)) if y[0][i] == 0])
-X1 = np.array([X[i] for i in xrange(len(X)) if y[0][i] == 1])
-X0t = X0.transpose()
-X1t = X1.transpose()
-x1, x2 = eval(T, X)
-print(T)
-mp.plot(X0t[1], X0t[2], 'o', color='red')
-mp.plot(X1t[1], X1t[2], 'o', color='green')
-mp.plot(x1, x2)
-mp.show()
+def Run():
+    X, x = parseInput('Data/q2x.dat', True)
+    Y, y = parseInput('Data/q2y.dat', False)
+
+    T = NewtonRaphson(X, Y, 0.00000000001)
+    X0 = np.array([X[i] for i in xrange(len(X)) if y[0][i] == 0])
+    X1 = np.array([X[i] for i in xrange(len(X)) if y[0][i] == 1])
+    X0t = X0.transpose()
+    X1t = X1.transpose()
+    x1, x2 = eval(T, X)
+    print(T)
+
+    mp.plot(X0t[1], X0t[2], 'o', color='red')
+    mp.plot(X1t[1], X1t[2], 'o', color='green')
+    mp.plot(x1, x2)
+    mp.show()
+
+
+if __name__ == '__main__':
+    Run()

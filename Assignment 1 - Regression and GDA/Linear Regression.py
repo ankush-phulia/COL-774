@@ -11,7 +11,7 @@ import math
 def parseInput(in_file_name, chk):
     temp = (np.loadtxt(in_file_name, dtype=float, ndmin=2))
     temp2 = (np.loadtxt(in_file_name, dtype=float, ndmin=2))
-    if chk == False:
+    if not(chk):
         return temp, temp2, temp2.reshape((1, len(temp))), temp.reshape((1, len(temp)))
     else:
         mean = temp.sum()/len(temp)
@@ -94,43 +94,43 @@ def Jay(T0, T1, X, Y):
     return temp
 
 
-X1, X2, xtemp, x = parseInput('Data/q1x.dat', True)
-Y1, Y2, ytemp, y = parseInput('Data/q1y.dat', False)
+def Run():
+    X1, X2, xtemp, x = parseInput('Data/q1x.dat', True)
+    Y1, Y2, ytemp, y = parseInput('Data/q1y.dat', False)
 
-T, Th, J = gradientDescent(X1, Y1, 0.02, 0.00000000001)
-T2, Th2, J2 = gradientDescent(X2, Y2, 0.02, 0.00000000001)
-print(T)
-print(T2)
+    T, Th, J = gradientDescent(X1, Y1, 0.02, 0.00000000001)
+    T2, Th2, J2 = gradientDescent(X2, Y2, 0.02, 0.00000000001)
+    print(T)
+    print(T2)
+    # plotPts(x,y)
+    # plotLine(T,X,x)
+    # mp.show()
 
-# plotPts(x,y)
-# plotLine(T,X,x)
-# mp.show()
+    fig = mp.figure()
+    ax = fig.gca(projection='3d')
+    X = np.arange(-2, 5, 0.25)
+    Y = np.arange(-2, 5, 0.25)
+    X, Y = np.meshgrid(X, Y)
 
-fig = mp.figure()
-ax = fig.gca(projection='3d')
+    Z = np.ones((len(X), len(Y)))
+    for i in xrange(len(X)):
+        for j in xrange(len(Y)):
+            Z[i][j] = Jay(X[i][j], Y[i][j], X1, Y1)
+    surface = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm,
+                              linewidth=0, antialiased=False)
 
-X = np.arange(-2, 5, 0.25)
-Y = np.arange(-2, 5, 0.25)
-X, Y = np.meshgrid(X, Y)
+    # Contours
+    fig3 = mp.figure()
+    ax2 = fig3.add_subplot(111, projection='3d')
+    cset = ax2.contour(X, Y, Z, cmap=cm.coolwarm)
+    ax2.clabel(cset, fontsize=9, inline=1)
 
-Z = np.ones((len(X), len(Y)))
-for i in xrange(len(X)):
-    for j in xrange(len(Y)):
-        Z[i][j] = Jay(X[i][j], Y[i][j], X1, Y1)
+    # Animation
+    for i in xrange(len(Th)):
+        ax.scatter(Th[i][0], Th[i][1], J[i])
+        ax2.scatter(Th[i][0], Th[i][1], J[i])
+        mp.pause(0.0001)
 
-surface = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm,
-                          linewidth=0, antialiased=False)
 
-# Contours
-
-fig3 = mp.figure()
-ax2 = fig3.add_subplot(111, projection='3d')
-cset = ax2.contour(X, Y, Z, cmap=cm.coolwarm)
-ax2.clabel(cset, fontsize=9, inline=1)
-
-# Animation
-
-for i in xrange(len(Th)):
-    ax.scatter(Th[i][0], Th[i][1], J[i])
-    ax2.scatter(Th[i][0], Th[i][1], J[i])
-    mp.pause(0.0001)
+if __name__ == '__main__':
+    Run()
