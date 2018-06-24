@@ -1,0 +1,15 @@
+ATTRIBUTE_NAME                                                          ATTRIBUTE-NUMBERS
+Shot Length                                                             0
+Motion Distribution( Mean and Variance)                                 1 - 2
+Frame Difference Distribution ( Mean and Variance)                      3 - 4
+Short time energy ( Mean and Variance)                                  5 - 6
+ZCR( Mean and Variance)                                                 7 - 8
+Spectral Centroid ( Mean and Variance)                                  9 - 10
+Spectral Roll off ( Mean and Variance)                                  11 - 12
+Spectral Flux ( Mean and Variance)                                      13 - 14
+Fundamental Frequency ( Mean and Variance)                              15 - 16
+Motion Distribution ( 40 bins)                                          17 - 57
+Frame Difference Distribution ( 32 bins)                                58 - 90
+Text area distribution ( 15 bins Mean and 15 bins for variance )        91 - 121
+Bag of Audio Words ( 4000 bins)                                         122 - 4122
+Edge change Ratio ( Mean and Variance)                                  4123 - 4124
