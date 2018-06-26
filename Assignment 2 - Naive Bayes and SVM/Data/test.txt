@@ -1,4 +1,0 @@
-A abc bcd cde
-B qaz wsx rfv
-A qaz abc cde
-B qwe asd edc
