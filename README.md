@@ -1,6 +1,6 @@
-# COL-774
+# Machine Learning
 
-Projects done in Machine Learning, 2017
+Projects done in COL 774 - Machine Learning, 2017
 
 1. Linear and Logistic Regression, GDA
 2. Naive Bayes and SVM classifiers
